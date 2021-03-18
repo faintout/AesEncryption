@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.0.0/aes.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <div>
+        <input type="text" id="encry">
+        <button id="encryBtn">加密</button>
+        <span id="encryVal"></span>
+    </div>
+    <div>
+        <input type="text" id="decry">
+        <button id="decryBtn">解密</button>
+        <span id="decryVal"></span>
+    </div>
+    <script type="module">
+        import { Encryption } from "./encryption.js";
+        let encryption = new Encryption();
+        //加密部分
+        $('#encryBtn').click(function() {
+            console.log(encryption.encrypt($('#encry').val()));
+            let encryptVal = $('#encry').val()?encryption.encrypt($('#encry').val()):'请输入加密的值'
+            $('#encryVal').html(`【${encryptVal?encryptVal:'该值加密失败。'}】`)
+        })
+        //解密部分
+        $('#decryBtn').click(function() {
+            console.log('dec',Boolean(encryption.decrypt($('#decry').val())));
+            let decryptVal = $('#decry').val()?encryption.decrypt($('#decry').val()):'请输入解密的值'
+            $('#decryVal').html(`【${decryptVal?decryptVal:'该值解密失败。'}】`)
+        })
+    </script>
+</body>
+
+</html>
